@@ -1,7 +1,6 @@
 name: First Workflow
 on: [push]
 
-# test
 jobs: 
   run-shell-command:
     runs-on: ubuntu-latest
