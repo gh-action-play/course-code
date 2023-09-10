@@ -11,3 +11,18 @@ jobs:
         run: |
           node -v
           npm -v
+  parrallel-job-macos:
+    runs-on: macos-latest
+    steps:
+      - name: View SW Version
+        run: sw_vers
+  dependant-job:
+    # this job depends on the run-shell-command job
+    # this can be an array or single job [command1, command2]
+    needs: run-shell-command
+    runs-on: windows-latest
+    steps:
+      - name: echo a string
+        run: Write-OutPut "Windows String"
+      - name: Error Step
+        run: doesnotexist
