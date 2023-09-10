@@ -20,9 +20,13 @@ jobs:
         run: pwd
   display-wd-info-windows:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: powershell
     steps:
       - name: Display Working Directory & List Files
         run: |
+          Get-Location
           dir
           echo $env:GITHUB_SHA
           echo $env:GITHUB_REPOSITORY
