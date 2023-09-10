@@ -1,5 +1,8 @@
 name: Workflow Dirs & Shells
 on: [push]
+defaults:
+  run:
+    shell: bash
 
 jobs:
   display-wd-info:
@@ -14,11 +17,20 @@ jobs:
           echo $GITHUB_WORKSPACE
   display-wd-info-windows:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: /de/ed
     steps:
       - name: Display Working Directory & List Files
         run: |
-          pwd
-          ls -al
-          echo $GITHUB_SHA
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_WORKSPACE
+          Get-Location
+          dir
+          echo $env:GITHUB_SHA
+          echo $env:GITHUB_REPOSITORY
+          echo $envGITHUB_WORKSPACE
+      - name: Python Shell
+        shell: python
+        run: |
+          import platform
+          print(platform)
