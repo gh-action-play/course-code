@@ -15,12 +15,11 @@ jobs:
           echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
+      - name: Change Work Directory
+        working-directory: /home/runner
+        run: pwd
   display-wd-info-windows:
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: pwsh
-        working-directory: /de/ed
     steps:
       - name: Display Working Directory & List Files
         run: |
