@@ -2,8 +2,30 @@ name: Repository events
 
 on: 
   push:
+    branches: 
+      - main
+      - "feature/*" # feature/featA feature/featB but does not match feature/featA/featB
+      - "feature/**" # feature/featA feature/featA/featB
+      - "!feature/featA" # ignore feature/featA
+    # branches-ignore:
+    #   - "feature/featA" # ignore feature/featA
+    tags:
+      - "v*" # v1.0.0 v2.0.0
+      - "!v1.0.0" # ignore v1.0.0
+    paths:
+      - "**.js" # index.js src/index.js
+      - "README.md" # README.md
+      - "docs/**" # docs/README.md docs/README2.md
+      - "!docs/README.md" # ignore docs/README.md
   pull_request:
     types: [opened, reopened, synchronize, closed]
+    branches:
+      - main
+      - "feature/*"
+    paths:
+      - "**.js"
+      - "README.md"
+      - "docs/**"
   issues:
     types: [opened]
 
