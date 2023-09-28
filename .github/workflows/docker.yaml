@@ -6,8 +6,19 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: node:20-alpine3.17
+      env:
+        API_URL: some-url.com
+      ports:
+        - 80
+      # volumes:
+      #   - vol_name: /path/in/containers
+      #   - /path/to/container
+      # options: --cpus 1 --memory 1g
     steps:
       - name: Log Node & OS Versions
         run: |
           echo "Node Version: $(node -v)"
           echo "OS Version: $(uname -a)"
+      - name: Log Env
+        run: |
+          echo "API_URL: $API_URL"
