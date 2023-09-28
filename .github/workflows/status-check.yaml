@@ -7,8 +7,9 @@ jobs:
     steps:
       - name: Step 1
         run: sleep 20
+        id: step-1
       - name: Runs on failure
-        if: failure()
+        if: failure() && steps.step-1.comclusion == 'failure' # ipprtant to use failure() first
         run: echo "This step runs on failure"
       - name: Runs on success
         # This is not needed as it is the default

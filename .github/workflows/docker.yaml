@@ -1,0 +1,13 @@
+name: "Test docker actions"
+on: [workflow_dispatch]
+
+jobs:
+  docker-job:
+    runs-on: ubuntu-latest
+    container: 
+      image: node:20-alpine3.17
+    steps:
+      - name: Log Node & OS Versions
+        run: |
+          echo "Node Version: $(node -v)"
+          echo "OS Version: $(uname -a)"

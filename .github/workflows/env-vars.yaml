@@ -1,0 +1,26 @@
+name: Environment Variables
+on: [push]
+
+env:
+  WF_LEVEL_ENV: "Workflow Level Env"
+
+jobs:
+  env-vars-and-context:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' # Here very important to use context and not env vars
+    env:
+      JOB_LEVEL_ENV: "Job Level Env"
+    steps:
+      - name: Log ENV VAR
+        run: echo $GITHUB_REF
+      - name: Log Context
+        run: echo '${{ github.ref }}'
+      - name: Log Custom Env vars
+        env:
+         STEP_LEVEL_ENV: "Step Level Env"
+         WF_LEVEL_ENV: "Overriden in step"
+        run: |
+          echo  '${{ env.STEP_LEVEL_ENV }}'
+          echo  $STEP_LEVEL_ENV # cannot use in if condition
+          
+
